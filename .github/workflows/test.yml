@@ -24,5 +24,7 @@ jobs:
           git checkout conflict
           git merge main || echo "::set-output name=failure::failed"
       - name: Failure note
-        if: always()
-        run: echo "${{ steps.merge-dev.outputs.failure }}"
+        if: always() && ${{ steps.merge-dev.outputs.failure }} == "failed"
+        run: |
+          echo "Failed with note"
+          eixt 1
