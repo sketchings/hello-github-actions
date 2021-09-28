@@ -20,10 +20,9 @@ jobs:
           git config user.email 'gha@sketchings.com'
       - name: Merge main back to develop to ensure any changes are brought back
         id: merge-dev
-        continue-on-error: true
         run: |
           git checkout conflict
-          git merge main
+          git merge main || echo "::set-output name=failure::failed"
       - name: Failure note
         if: always()
-        run: echo "${{ steps.merge-dev.outputs }}"
+        run: echo "${{ steps.merge-dev.outputs.failure }}"
