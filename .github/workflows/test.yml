@@ -21,7 +21,7 @@ jobs:
       - name: Merge main back to develop to ensure any changes are brought back
         run: |
           git checkout conflict
-          git merge main || echo "Failed to merge";
+          git merge main || echo "Failed to merge"
       - name: Failure note
         if: ${{ failure() }}
         run: echo "failed with note"
