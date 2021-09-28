@@ -22,8 +22,9 @@ jobs:
         id: merge-dev
         run: |
           git checkout conflict
-          git merge main || echo "::set-output name=failure::failed"
-      - name: Failure note
+          git merge main
+          echo "::set-output name=failure::failed"
+      - name: Merge Failure, fix before next deploy
         if: always() && ${{ steps.merge-dev.outputs.failure }} == "failed"
         run: |
           echo "Failed to merge"
