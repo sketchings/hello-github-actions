@@ -25,7 +25,7 @@ jobs:
           git merge main
           echo "::set-output name=failure::failed"
       - name: Merge Failure, fix before next deploy
-        if: always() && ${{ steps.merge-dev.outputs.failure }} == "failed"
+        if: failure()
         run: |
           echo "Failed to merge"
           exit 1
