@@ -26,5 +26,5 @@ jobs:
       - name: Failure note
         if: always() && ${{ steps.merge-dev.outputs.failure }} == "failed"
         run: |
-          echo "Failed with note"
-          eixt 1
+          echo "Failed to merge"
+          exit 1
