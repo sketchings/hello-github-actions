@@ -8,16 +8,16 @@ on:
 jobs:
   failure:
     runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Code
-          uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
-          with:
-            ref: main
-            fetch-depth: 0  # needed to compare logs
-        - name: Merge main back to develop to ensure any changes are brought back
-          run: |
-            git checkout conflict
-            git merge main
-        - name: Failure note
-          if: ${{ failure() }}
-          run: echo "failed with note"
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        with:
+          ref: main
+          fetch-depth: 0  # needed to compare logs
+      - name: Merge main back to develop to ensure any changes are brought back
+        run: |
+          git checkout conflict
+          git merge main
+      - name: Failure note
+        if: ${{ failure() }}
+        run: echo "failed with note"
