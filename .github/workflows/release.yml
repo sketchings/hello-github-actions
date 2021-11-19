@@ -1,0 +1,17 @@
+name: Release Test
+
+on:
+  release:
+    types: [released]
+  workflow_dispatch:
+jobs:
+  release-tag:
+    name: Release Tag
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: build ecs image
+        env:
+          DOCKER_BUILDKIT: 1
+          REPO: ${{ steps.login-ecr.outputs.registry }}/brightmd/retina
+        run: echo ${GITHUB_REF#refs/*/release-}
