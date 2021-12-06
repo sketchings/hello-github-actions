@@ -1,0 +1,22 @@
+name: "Testing GHA Release"
+on:
+  release:
+  workflow_dispatch:
+jobs:
+  releaseTest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Version Tag from Release
+        run: echo "VERSION_TAG=${{ github.event.release.tag_name/release-// }}" >> $GITHUB_ENV
+      - name: Use Version Tag
+        run: echo ${{ env.VERSION_TAG }}
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump env
+        run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
