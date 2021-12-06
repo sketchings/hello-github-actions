@@ -10,6 +10,13 @@ jobs:
         run: echo "VERSION_TAG=${{ github.event.release.tag_name/release-// }}" >> $GITHUB_ENV
       - name: Use Version Tag
         run: echo ${{ env.VERSION_TAG }}
+  release-tag:
+    name: Release Tag
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: show release tag
+        run: echo ${GITHUB_REF#refs/*/release-}
   debug:
     name: Debug
     runs-on: ubuntu-latest
